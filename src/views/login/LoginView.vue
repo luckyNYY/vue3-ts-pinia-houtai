@@ -7,7 +7,6 @@
       class="login-form"
       label-width="auto"
       label-position="left"
-      size="large"
     >
       <h3>后台登录</h3>
       <el-form-item prop="email" label="用户名：">
@@ -17,7 +16,7 @@
           v-model="loginUser.email"
         ></el-input>
       </el-form-item>
-      <el-form-item prop="password" label="密码：">
+      <el-form-item prop="password" label="密码：" show-password>
         <el-input
           prefix-icon="el-icon-view"
           placeholder="请输入密码"
@@ -25,14 +24,26 @@
           v-model="loginUser.password"
         ></el-input>
       </el-form-item>
+      <el-form-item prop="yanzhengma" label="验证码：">
+        <el-input placeholder="请输入内容" props="yanzhengma">
+          <template v-slot:append>验证码</template>
+        </el-input>
+      </el-form-item>
+      <el-progress
+        :text-inside="true"
+        :stroke-width="24"
+        :percentage="100"
+        status="success"
+        class="login-slider"
+        >滑动验证码</el-progress
+      >
       <el-form-item>
         <el-button type="primary" @click="submitForm()" class="login-btn"
           >登录</el-button
         >
       </el-form-item>
-      <span
-        >还没有账号？点击<router-link to="/register">注册</router-link></span
-      >
+      <span>忘记密码？| </span>
+      <span><router-link to="/register">注册</router-link></span>
     </el-form>
   </div>
 </template>
@@ -41,7 +52,9 @@ import { ElMessage, FormInstance, FormRules } from 'element-plus'
 import { reactive, ref } from 'vue'
 const loginUser = reactive({
   email: '',
-  password: ''
+  password: '',
+  seccode: '',
+  yanzhengma: ''
 })
 // 表单规则
 const rules = reactive<FormRules>({
@@ -101,6 +114,10 @@ const submitForm = async () => {
   padding: 10px 50px 50px 50px;
   margin: 50px;
   border-radius: 20px;
+}
+
+.login-slider {
+  margin: 15px 0;
 }
 
 .login-btn {
