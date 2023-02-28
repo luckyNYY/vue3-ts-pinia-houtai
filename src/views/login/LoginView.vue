@@ -39,7 +39,7 @@
       >
       <el-form-item>
         <el-button type="primary" @click="submitForm()" class="login-btn"
-          >登录</el-button
+          ><router-link to="/">登录</router-link></el-button
         >
       </el-form-item>
       <span>忘记密码？| </span>
@@ -87,7 +87,6 @@ const submitForm = async () => {
     ElMessage.error('表单验证失败')
     throw err
   })
-  console.log('正式登录请求')
 }
 </script>
 <style lang="less" scoped>
