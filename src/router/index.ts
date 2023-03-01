@@ -15,6 +15,17 @@ const routes: Array<RouteRecordRaw> = [
     path: '/',
     name: 'home',
     component: () => import('../views/home/HomeView.vue')
+  },
+  {
+    path: '/:catchAll(.*)',
+    redirect: '/404',
+    children: [
+      {
+        path: '/404',
+        name: '404',
+        component: () => import('../views/http/NotFound.vue')
+      }
+    ]
   }
 ]
 

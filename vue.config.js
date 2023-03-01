@@ -12,5 +12,14 @@ module.exports = defineConfig({
     config
       .plugin('Components')
       .use(Components({ resolvers: [ElementPlusResolver()] }))
+  },
+  devServer: {
+    proxy: {
+      '/api': {
+        target: process.env.VUE_APP_URL,
+        ws: true,
+        changeOrigin: true
+      }
+    }
   }
 })
